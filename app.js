@@ -5,13 +5,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var busboy = require('connect-busboy');
-var Dropbox = require("dropbox");
-var client = new Dropbox.Client({
-    key: "4lq986lr70bcmjt",
-    secret: ""
-});
-client.authDriver(new Dropbox.AuthDriver.NodeServer(8191));
-
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
