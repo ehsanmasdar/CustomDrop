@@ -16,5 +16,5 @@
     "connect-busboy": "latest",
     "fs":"latest",
     "dropbox":"latest"
-  }
+   }
 }

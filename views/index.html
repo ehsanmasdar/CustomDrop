@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Assignment Namer</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css">
+    <script type="text/javascript">
+
+      var assignments = [];
+      assignments["1"] = ["Practice1","CP01"];
+      assignments["3"] = ["Practice1","WA01"];
+      assignments["6"] = ["Practice1","CP01"];
+      assignments["7"] = ["Practice1","DE01"];
+
+      function fillSelect(nValue,nList){
+        nList.options.length = 1;
+        var curr = assignments[nValue];
+        for (each in curr){
+          var nOption = document.createElement('option');
+          nOption.appendChild(document.createTextNode(curr[each]));
+          nOption.setAttribute("value",curr[each]);
+          nList.appendChild(nOption);
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="box">
+        <form method="post" action="/upload" enctype="multipart/form-data">
+          <table>
+            <tr>
+              <td>Period</td>
+              <td>
+                <select name="period" onchange="fillSelect(this.value,this.form['assignments'])">
+                  <option value="">select period</option>
+                  <option value="1">1st (Programming)</option>
+                  <option value="3">3rd (Web Applications)</option>
+                  <option value="6">6th (Programming)</option>
+                  <option value="7">7th (Digital Electronics)</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>Last name</td>
+              <td><input type="text" name='lastname'></td>
+            </tr>
+            <tr>
+              <td>First name</td>
+              <td><input type="text" name='firstname'></td>
+            </tr>
+            <tr>
+              <td>Secret Code</td>
+              <td><input type="text" name='secret'></td>
+            </tr>
+            <tr>
+              <td>Assignment</td>
+              <td><input type="text" name='assignment'></td>
+	      <!-- Select from a list of assignments
+              <td>
+                <select name="assignments">
+                  <option value="">Select One</option>
+                </select>
+              </td>
+              -->
+            </tr>
+            <tr>
+              <td>File Extension</td>
+              <td><input type="text" name='extension'></td>
+            </tr>
+            <tr>
+		<td>File</td>
+		<td><input type="file" name="file"></td>
+            </tr>
+          </table>
+	  <br><br>
+          <center><input type="submit" value="Click Here"></center>
+          <br>
+	  <tr>
+        </form>
+        <br>
+        <br>
+       
+      </div>
+    </div>
+  </body>
+</html>
