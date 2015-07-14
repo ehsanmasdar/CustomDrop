@@ -7,19 +7,18 @@ var path = require('path')
 var Dropbox = require("dropbox");
 var cookieParser = require('cookie-parser');
 var client = new Dropbox.Client({
-    key: "",
-    secret: "",
+    key: "ddipg1nxhdfzhly",
+    secret: "2kpkhfvwt8dkd9l",
     sandbox: false,
-    token: ""
+    token: "K30O7901GxwAAAAAAAAEtrrf97vO6tTSyHd1I4MU7Gn0ojMm900yvsmuRUcFQZ1v"
 });
 /* GET home page. */
 router.get('/', function(req, res, next) {
  console.log("Cookies: ", req.cookies); 
-<<<<<<< HEAD
     if (req.cookies.period && req.cookies.lastname && req.cookies.firstname && req.cookies.secret)
      res.render('index.html',req.cookies);
  else
-     res.render('index.html',{period:"",lastname:"",firstname:"",secret:"");
+     res.render('index.html',{period:"",lastname:"",firstname:"",secret:""});
 });
 router.get('/testfile', function(req, res, next) {
   client.writeFile("test.txt", "sometext", function (error, stat) {
@@ -53,10 +52,7 @@ router.post('/upload', function(req, res) {
         	    });
        		 });
 	    });
-<<<<<<< HEAD
              res.cookie('period', period, { maxAge: 365*24*60*60*1000 });
-=======
->>>>>>> a8cf6856c66182c551c500448a331189fc6eb3f7
 	     res.cookie('lastname', lastname, { maxAge: 365*24*60*60*1000 });
              res.cookie('firstname', firstname, { maxAge: 365*24*60*60*1000 });
              res.cookie('secret', secret, { maxAge: 365*24*60*60*1000 });
