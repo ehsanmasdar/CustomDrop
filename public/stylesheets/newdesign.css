@@ -1,0 +1,23 @@
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eee;
+}
+.main-form{
+  padding: 15px;
+  margin: 0 auto;
+}
+.btn{
+  max-width:300px;
+}
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}

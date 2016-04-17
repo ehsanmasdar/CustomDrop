@@ -6,20 +6,25 @@ var router = express.Router();
 var path = require('path')
 var Dropbox = require("dropbox");
 var cookieParser = require('cookie-parser');
+var multer  = require('multer')
+var upload = multer({ dest: '/home/rmueller/CustomDrop/uploads/' })
+
 var client = new Dropbox.Client({
-    key: "",
-    secret: "",
+    key: "x",
+    secret: "x",
     sandbox: false,
-    token: ""
+    token: "x"
 });
-/* GET home page. */
+
 router.get('/', function(req, res, next) {
- console.log("Cookies: ", req.cookies); 
-<<<<<<< HEAD
+ console.log("Cookies: ", req.cookies);
     if (req.cookies.period && req.cookies.lastname && req.cookies.firstname && req.cookies.secret)
      res.render('index.html',req.cookies);
  else
-     res.render('index.html',{period:"",lastname:"",firstname:"",secret:"");
+     res.render('index.html',{period:"",lastname:"",firstname:"",secret:""});
+});
+router.get('/newdesign',function(req,res,next){
+  res.render('newdesign.html',{period:"",lastname:"",firstname:"",secret:""});
 });
 router.get('/testfile', function(req, res, next) {
   client.writeFile("test.txt", "sometext", function (error, stat) {
@@ -30,38 +35,18 @@ router.get('/testfile', function(req, res, next) {
     });
     res.render('index.html');
 });
-router.post('/upload', function(req, res) {
-    var fstream,lastname,period,firstname,secret,assignment,extension;
-    req.pipe(req.busboy);
-    req.busboy.on('field', function(fieldname, val, fieldnameTruncated, valTruncated) {
-      	console.log('Field [' + fieldname + ']: value: ' + inspect(val));
-      	if (fieldname == "lastname"){lastname = val;}
-        if (fieldname == "firstname"){firstname = val;}
-	if (fieldname == "period"){period = val;}
-	if (fieldname == "secret"){secret = val;}
-	if (fieldname == "assignment"){
-		req.busboy.on('file', function (fieldname, file, filename) {
-       		 console.log("Uploading: " + filename);
-       		 file.on('data', function(data) {
-		 var finalfilename = period + "/" + lastname + firstname + secret + "_" + val + path.extname(filename);
-           	 console.log("Final file name:",finalfilename);
-		 client.writeFile(finalfilename, data, function (error, stat) {
-               		 if (error) {
-                	  console.log(error);
-                	  return;
-                	 }
-        	    });
-       		 });
-	    });
-<<<<<<< HEAD
-             res.cookie('period', period, { maxAge: 365*24*60*60*1000 });
-=======
->>>>>>> a8cf6856c66182c551c500448a331189fc6eb3f7
-	     res.cookie('lastname', lastname, { maxAge: 365*24*60*60*1000 });
-             res.cookie('firstname', firstname, { maxAge: 365*24*60*60*1000 });
-             res.cookie('secret', secret, { maxAge: 365*24*60*60*1000 });
-	     res.render('success.html');    	
-	}
+router.post('/upload',upload.single('file'), function(req, res,next) {
+    var finalfilename = req.body.period + "/" + req.body.lastname + req.body.firstname + req.body.secret + "_" + req.body.assignment + path.extname(req.file.originalname);
+    fs.readFile(req.file.path, function(error, data) {
+      if (error) {
+        console.log(error);
+      }
+      client.writeFile(finalfilename, data, function(error, stat) {
+        if (error) {
+          console.log(error);
+        }
+      });
     });
+    res.render('success.html');
 });
 module.exports = router;

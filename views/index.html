@@ -1,85 +1,88 @@
-<!DOCTYPE HTML>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Assignment Namer</title>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css">
-    <script type="text/javascript">
+<head>
+<link rel="stylesheet" href="stylesheets/newdesign.css">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 
-      var assignments = [];
-      assignments["1"] = ["Practice1","CP01"];
-      assignments["3"] = ["Practice1","WA01"];
-      assignments["6"] = ["Practice1","CP01"];
-      assignments["7"] = ["Practice1","DE01"];
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script>
+$( document ).ready(function() {
+    $('#period').val("<%= period %>"); 
+});
+</script>
+</head>
+<body>
+<div class="container">
+<h2 class="text-center">Drop a File</h2>
+<form class="form-horizontal main-form"  action="/upload" method="post" enctype="multipart/form-data">
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="period">Period</label>
+  <div class="col-md-4">
+    <select id="period" name="period" class="form-control" required>
+      <option value="">Select your class</option>
+      <option value="0A">0A Programming</option>
+      <option value="1">1st Programming</option>
+      <option value="3">3rd Web Applications</option>
+      <option value="5">5th Programming</option>
+      <option value="6">6th Digital Electronics</option>
+    </select>
+  </div>
+</div>
 
-      function fillSelect(nValue,nList){
-        nList.options.length = 1;
-        var curr = assignments[nValue];
-        for (each in curr){
-          var nOption = document.createElement('option');
-          nOption.appendChild(document.createTextNode(curr[each]));
-          nOption.setAttribute("value",curr[each]);
-          nList.appendChild(nOption);
-        }
-      }
-    </script>
-  </head>
-  <body>
-    <div id="container">
-      <div id="box">
-        <form method="post" action="/upload" enctype="multipart/form-data">
-          <table>
-            <tr>
-              <td>Period</td>
-              <td>
-                <select name="period" onchange="fillSelect(this.value,this.form['assignments'])">
-                  <option value="">select period</option>
-                  <option value="1">1st (Programming)</option>
-                  <option value="3">3rd (Web Applications)</option>
-                  <option value="6">6th (Programming)</option>
-                  <option value="7">7th (Digital Electronics)</option>
-                </select>
-              </td>
-            </tr>
-            <tr>
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="firstname">First Name</label>  
+  <div class="col-md-4">
+  <input id="firstname" name="firstname" type="text" value="<%= firstname %>" placeholder="" class="form-control input-md" required="">
+    
+  </div>
+</div>
 
-              <td>First name</td>
-              <td><input type="text" name='firstname' value="<%= firstname %>"></td>
-            </tr>
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="lastname">Last Name</label>  
+  <div class="col-md-4">
+  <input id="lastname" name="lastname" type="text" value="<%= lastname %>" placeholder="" class="form-control input-md" required="">
+    
+  </div>
+</div>
 
-              <td>Last name</td>
-              <td><input type="text" name='lastname' value="<%= lastname %>"></td>
-            </tr>
-            <tr>
-            <tr>
-              <td>Secret Code</td>
-              <td><input type="text" name='secret' value="<%= secret %>"></td>
-            </tr>            
-	    <tr>
-              <td>Assignment</td>
-              <td><input type="text" name='assignment'></td>
-	      <!-- Select from a list of assignments
-              <td>
-                <select name="assignments">
-                  <option value="">Select One</option>
-                </select>
-              </td>
-              -->
-            </tr>
-            <tr>
-		<td>File</td>
-		<td><input type="file" name="file"></td>
-            </tr>
-          </table>
-	  <br><br>
-          <center><input type="submit" value="Click Here"></center>
-          <br>
-	  <tr>
-        </form>
-        <br>
-        <br>
-       
-      </div>
-    </div>
-  </body>
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="secret">Secret Code</label>  
+  <div class="col-md-4">
+  <input id="secret" name="secret" type="password" value="<%= secret %>" placeholder="" class="form-control input-md" required>
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="assignment">Assignment</label>  
+  <div class="col-md-4">
+  <input id="assignment" name="assignment" placeholder="enter EXACT name given on website" type="text" placeholder="" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- File Button --> 
+<div class="form-group">
+  <label class="col-md-4 control-label" for="file">File</label>
+  <div class="col-md-4">
+    <input id="file" name="file" class="input-file" type="file" required>
+  </div>
+</div>
+<div class="buttondiv col-md-4 col-md-offset-4 ">
+<button class="btn btn-lg btn-primary btn-block" type="submit">Drop File</button>
+</div>
+</form>
+
+</div> <!-- /container -->
+</body>
+
 </html>
